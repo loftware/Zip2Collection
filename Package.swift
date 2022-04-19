@@ -11,9 +11,8 @@ let package = Package(
   ],
   dependencies: [
     .package(
-      name: "LoftTest_StandardLibraryProtocolChecks",
       url: "https://github.com/loftware/StandardLibraryProtocolChecks",
-      .from("0.1.0")
+      from: "0.1.0"
     ),
   ],
   targets: [
@@ -28,7 +27,7 @@ let package = Package(
       dependencies: [
         "LoftDataStructures_Zip2Collection",
         .product(name: "LoftTest_StandardLibraryProtocolChecks",
-                 package: "LoftTest_StandardLibraryProtocolChecks"),
+                 package: "StandardLibraryProtocolChecks"),
       ],
       path: ".",
       exclude: auxilliaryFiles + ["Zip2Collection.swift"],
