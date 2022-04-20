@@ -156,7 +156,9 @@ extension Zip2Collection
 {
   public func index(before i: Index) -> Index {
     var r = i
-    _formIndex(&r, negativeOffsetBy: -1)
+    _normalize(&r)
+    base0.formIndex(before: &r.base0)
+    base1.formIndex(before: &r.base1)
     return r
   }
 
@@ -173,27 +175,6 @@ extension Zip2Collection
         base0.formIndex(&ip.pointee.base0, offsetBy: lengthDifference)
       }
     }
-  }
-
-  fileprivate func _formIndex(_ ip_: UnsafeMutableRawPointer, negativeOffsetBy n:Int) {
-    assert(n < 0)
-    let ip = ip_.assumingMemoryBound(to: Index.self)
-    _normalize(&ip.pointee)
-    base0.formIndex(&ip.pointee.base0, offsetBy: n)
-    base1.formIndex(&ip.pointee.base1, offsetBy: n)
-  }
-
-  fileprivate func _formIndex(
-    _ ip_: UnsafeMutableRawPointer, negativeOffsetBy n:Int, limitedBy lp_: UnsafeRawPointer) -> Bool
-  {
-    assert(n < 0)
-    let ip = ip_.assumingMemoryBound(to: Index.self)
-    let lp = lp_.assumingMemoryBound(to: Index.self)
-    _normalize(&ip.pointee)
-    let r0 = base0.formIndex(&ip.pointee.base0, offsetBy: n, limitedBy: lp.pointee.base0)
-    let r1 = base1.formIndex(&ip.pointee.base1, offsetBy: n, limitedBy: lp.pointee.base1)
-    assert(r0 == r1)
-    return r1
   }
 }
 
