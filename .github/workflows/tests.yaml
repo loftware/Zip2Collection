@@ -8,7 +8,7 @@ on:
 jobs:
 
     macOS-swift-56:
-        name: macOS (Swift 5.6)
+        name: macOS
         runs-on: macOS-latest
         steps:
         - name: Checkout
@@ -29,9 +29,9 @@ jobs:
           run: swift test -v --configuration release -Xswiftc -enable-testing --enable-test-discovery
 
     linux-swift-56:
-        name: Linux x86_64 (Swift 5.6)
+        name: Linux x86_64
         runs-on: ubuntu-20.04
-        container: swift:5.6-focal
+        container: swift:5.5-focal
         steps:
         - name: Checkout
           uses: actions/checkout@v1

@@ -7,7 +7,43 @@ extension Zip2Collection: RandomAccessCollectionAdapter {
 }
 
 final class Zip2CollectionTests: XCTestCase {
-  func checkZipConformances(length0 n0: Int, length1 n1: Int) {
+  func test0_0() {
+    checkConformances(0, 0)
+  }
+
+  func test0_1() {
+    checkConformances(0, 1)
+  }
+
+  func test0_2() {
+    checkConformances(0, 2)
+  }
+
+  func test1_0() {
+    checkConformances(1, 0)
+  }
+
+  func test1_1() {
+    checkConformances(1, 1)
+  }
+
+  func test1_2() {
+    checkConformances(1, 2)
+  }
+
+  func test2_0() {
+    checkConformances(2, 0)
+  }
+
+  func test2_1() {
+    checkConformances(2, 1)
+  }
+
+  func test2_2() {
+    checkConformances(2, 2)
+  }
+
+  func checkConformances(_ n0: Int, _ n1: Int) {
     let expected = Swift.zip(0..<n0, 0..<n1).map(Pair.init)
     do {
       let base0 = RandomAccessOperationCounter(0..<n0)
@@ -40,43 +76,8 @@ final class Zip2CollectionTests: XCTestCase {
       expecting: Swift.zip(0..<n0, 0...n1).map(Pair.init),
       writing: Swift.zip(10..<n0 + 10, 20...(n1 + 20)).map(Pair.init))
   }
-
-  func test_0_0() {
-    checkZipConformance(length0: 0, length1: 0)
-  }
-
-  func test_0_1() {
-    checkZipConformance(length0: 0, length1: 1)
-  }
-
-  func test_0_2() {
-    checkZipConformance(length0: 0, length1: 2)
-  }
-
-  func test_1_0() {
-    checkZipConformance(length0: 1, length1: 0)
-  }
-
-  func test_1_1() {
-    checkZipConformance(length0: 1, length1: 1)
-  }
-
-  func test_1_2() {
-    checkZipConformance(length0: 1, length1: 2)
-  }
-
-  func test_2_0() {
-    checkZipConformance(length0: 2, length1: 0)
-  }
-
-  func test_2_1() {
-    checkZipConformance(length0: 2, length1: 1)
-  }
-
-  func test_2_2() {
-    checkZipConformance(length0: 2, length1: 2)
-  }
 }
+
 
 // Local Variables:
 // fill-column: 100
