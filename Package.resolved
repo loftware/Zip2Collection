@@ -1,23 +1,25 @@
 {
-  "pins" : [
-    {
-      "identity" : "checkxcassertionfailure",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/loftware/CheckXCAssertionFailure",
-      "state" : {
-        "revision" : "1e92d9c40059a3ea50e30da05ec83cec54d9b7ab",
-        "version" : "0.9.6"
+  "object": {
+    "pins": [
+      {
+        "package": "LoftTest_CheckXCAssertionFailure",
+        "repositoryURL": "https://github.com/loftware/CheckXCAssertionFailure",
+        "state": {
+          "branch": null,
+          "revision": "1e92d9c40059a3ea50e30da05ec83cec54d9b7ab",
+          "version": "0.9.6"
+        }
+      },
+      {
+        "package": "LoftTest_StandardLibraryProtocolChecks",
+        "repositoryURL": "https://github.com/loftware/StandardLibraryProtocolChecks",
+        "state": {
+          "branch": null,
+          "revision": "81c93c9d442bcd87fd37d452d55edc9d4710f7ad",
+          "version": "0.1.0"
+        }
       }
-    },
-    {
-      "identity" : "standardlibraryprotocolchecks",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/loftware/StandardLibraryProtocolChecks",
-      "state" : {
-        "revision" : "81c93c9d442bcd87fd37d452d55edc9d4710f7ad",
-        "version" : "0.1.0"
-      }
-    }
-  ],
-  "version" : 2
+    ]
+  },
+  "version": 1
 }
