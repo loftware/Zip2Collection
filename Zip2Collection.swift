@@ -1,40 +1,3 @@
-public struct Pair<T0, T1> {
-  public var p0: T0
-  public var p1: T1
-
-  public init(_ p0: T0, _ p1: T1) {
-    (self.p0, self.p1) = (p0, p1)
-  }
-}
-
-extension Pair
-  : RandomAccessCollection,
-    BidirectionalCollection,
-    Collection, Sequence, MutableCollection
-  where T0 == T1
-{
-  public typealias Element = T0
-  public typealias Index = Int
-
-  public var startIndex: Int { 0 }
-  public var endIndex: Int { 2 }
-
-  public subscript(i: Int) -> T0 {
-    get { return i == 0 ? p0 : p1 }
-    set { if i == 0  { p0 = newValue } else { p1 = newValue } }
-  }
-}
-
-extension Pair: Equatable where T0: Equatable, T1: Equatable {}
-extension Pair: Hashable where T0: Hashable, T1: Hashable {}
-extension Pair: Comparable where T0: Comparable, T1: Comparable {
-  public static func <(l: Self, r: Self) -> Bool {
-    return l.p0 < r.p0 ? true
-      : l.p0 > r.p0 ? false
-      : l.p1 < r.p1
-  }
-}
-
 private protocol Zip2RandomAccessCollection {
   func _normalize(_ ip: UnsafeMutableRawPointer)
 }
@@ -62,10 +25,10 @@ public struct Zip2Collection<Base0: Collection, Base1: Collection> : Collection
     }
   }
 
-  public typealias Element = Pair<Base0.Element, Base1.Element>
+  public typealias Element = (Base0.Element, Base1.Element)
 
   public subscript(i: Index) -> Element {
-    get { .init(base0[i.base0], base1[i.base1]) }
+    get { (base0[i.base0], base1[i.base1]) }
   }
 
   public func index(after i: Index) -> Index {
@@ -144,8 +107,8 @@ public struct Zip2Collection<Base0: Collection, Base1: Collection> : Collection
 extension Zip2Collection: MutableCollection where Base0: MutableCollection, Base1: MutableCollection
 {
   public subscript(i: Index) -> Element {
-    get { .init(base0[i.base0], base1[i.base1]) }
-    set { base0[i.base0] = newValue.p0; base1[i.base1] = newValue.p1 }
+    get { (base0[i.base0], base1[i.base1]) }
+    set { base0[i.base0] = newValue.0; base1[i.base1] = newValue.1 }
   }
 }
 
@@ -180,6 +143,12 @@ extension Zip2Collection
 
 public func zip<C0: Collection, C1: Collection>(_ c0: C0, _ c1: C1) -> Zip2Collection<C0, C1> {
   Zip2Collection(c0, c1)
+}
+
+extension Collection {
+  public func enumerated() -> Zip2Collection<Range<Int>, Self> {
+    zip(0..<Int.max, self)
+  }
 }
 
 // Local Variables:
